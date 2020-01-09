@@ -8,7 +8,10 @@ def home(request):
         'articles': articles,
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'main/index.html', context)
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'main/about.html')
+
+def contact_us(request):
+    return render(request, 'main/contact_us.html')
