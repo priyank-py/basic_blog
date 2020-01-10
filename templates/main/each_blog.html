@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+<h1 class="text-center text-muted">{{article.title}}</h1>
+<div class="text-center">
+<span class="mr-4"><i class="fa fa-clock-o mr-2"></i><small>Published on: {{article.published_on|timesince}}</small></span>
+<span><i class="fa fa-user mr-2"></i><small><strong>Writer:&nbsp; {{article.writer.username|title}}</strong></small></span>
+</div>
+
+<div class="container my-5">
+    {{article.body}}
+</div>
+
+{% endblock content %}
