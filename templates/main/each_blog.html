@@ -8,7 +8,16 @@
 <span><i class="fa fa-user mr-2"></i><small><strong>Writer:&nbsp; {{article.writer.username|title}}</strong></small></span>
 </div>
 
+    {% if article.title_image %}
+        <div class="container mx-auto my-4 mt-5 d-flex justify-content-center">
+            <img src="{{article.title_image.url}}" alt="not found">
+        </div>
+    {% endif %}
+
+
 <div class="container my-5">
+    
+
     {{article.body}}
 </div>
 
