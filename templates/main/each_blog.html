@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% load humanize %}
+
+{% block title %}
+
+<title>{{article.title}}</title>
+
+{% endblock title %}
+
 {% block content %}
 
 <h1 class="text-center text-muted">{{article.title}}</h1>
@@ -20,5 +27,28 @@
 
     {{article.body}}
 </div>
+
+<div class="float-left my-5">
+    <form method="POST" class="my-5">
+        {% csrf_token %}
+        {{form}}
+        <button type="save" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<hr>
+
+<div class="container float-left mb-5">
+    <ul class="reviews list-group">
+        {% for review in article.reviews.all %}
+            <li class="list-group-item mb-3">
+                <span>User: {{review.user.username}}</span> <br>
+                <span>Stars: {{review.stars}}</span><br>
+                <span>Feedback: {{review.feedback}}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
 
 {% endblock content %}

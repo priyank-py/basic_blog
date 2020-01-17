@@ -2,16 +2,37 @@
 
 {% load static %}
 
+{% block title %}
+
+<title>Home</title>
+
+{% endblock title %}
+
 {% block content %}
-    <div class="container">
 
-        <h1>Home Page!</h1>
-        {% for article in articles %}
+    <div class="row">
+        <div class="col-md-8 border-right">
+            <div class="container">
 
-            <h2><a href="{% url 'each_blog' article.id %}">{{article.title}}</a></h2>
-            <p>{{article.body}}</p>
+                <h1>Home Page!</h1>
+                {% for article in articles %}
 
-        {% endfor %}
+                   <a name="{{article.id}}"> <h2><a href="{% url 'each_blog' article.id %}">{{article.title}}</a></h2></a>
+                    <p>{{article.body}}</p>
+
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="col-md-4">
+            <ul class="list-group list-group-item-action">
+                {% for article in articles %}
+                    <li class="list-group-item list-group-item-action list-group-item-info">
+                    <a href="#{{article.id}}">{{article.title}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock content %}
 
