@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container my-5">
+        <table class="table table-primary table-striped table-hover">
+        <thead>
+            <th>UserName</th>
+            <th>Article</th>
+            <th>Stars</th>
+            <th>Review</th>
+        </thead>
+        <tbody class="table table-hover">
+            {% for review in reviews %}
+                <tr>
+                    <td>{{review.user.username}}</td>
+                    <td><a href="{% url 'each_blog' review.article.id %}">{{review.article.title}}</a></td>
+                    <td>{{review.stars}}</td>
+                    <td>{{review.feedback}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+{% endblock content %}

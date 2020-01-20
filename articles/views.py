@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article
+from .models import Article, ArticleReview
 from .forms import ArticleReviewForm
 
 def home(request):
-    articles = Article.objects.all().order_by('-published_on').filter(genre='lifestyle')
+    articles = Article.objects.all().order_by('-published_on')
     
     context = {
         'articles': articles,
@@ -37,3 +37,12 @@ def each_blog(request, pk):
         'form': form,
     }
     return render(request, 'main/each_blog.html', context)
+
+def reviews(request):
+    reviews = ArticleReview.objects.all()
+    my_dict = {'text': 'hello'}
+    context = {
+        'reviews': reviews,
+        'my_dict': my_dict
+    }
+    return render(request, 'main/reviews.html', context)

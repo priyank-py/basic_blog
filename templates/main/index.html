@@ -17,7 +17,7 @@
                 <h1>Home Page!</h1>
                 {% for article in articles %}
 
-                   <a name="{{article.id}}"> <h2><a href="{% url 'each_blog' article.id %}">{{article.title}}</a></h2></a>
+                   <h2><a name="{{article.id}}" href="{% url 'each_blog' article.id %}">{{article.title}}</a></h2>
                     <p>{{article.body}}</p>
 
                 {% endfor %}
