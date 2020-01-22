@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, ArticleReview
-from .forms import ArticleReviewForm
+from .forms import ArticleForm, ArticleReviewForm
 
 def home(request):
     articles = Article.objects.all().order_by('-published_on')
@@ -46,3 +46,14 @@ def reviews(request):
         'my_dict': my_dict
     }
     return render(request, 'main/reviews.html', context)
+
+def create_blog(request):
+    if request.method =='POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = ArticleForm()
+
+    return render(request, 'main/create_blog.html', {'form':form})

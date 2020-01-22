@@ -43,12 +43,44 @@
         {% for review in article.reviews.all %}
             <li class="list-group-item mb-3">
                 <span>User: {{review.user.username}}</span> <br>
-                <span>Stars: {{review.stars}}</span><br>
+                <span id="stars">{{review.stars}}</span><br>
                 <span>Feedback: {{review.feedback}}</span>
             </li>
         {% endfor %}
     </ul>
 </div>
+
+<script>
+    const stars = document.querySelectorAll('#stars')
+    let allStars = []
+    
+    //console.log(allStars)
+    for (star of stars){
+        starStr = star.textContent
+        switch(starStr){
+        case 'one':
+            starNum = 1;
+            break;
+        case 'two':
+            starNum = 2;
+            break;
+        case 'three':
+            starNum = 3;
+            break;
+        case 'four':
+            starNum = 4;
+            break;
+        case 'five':
+            starNum = 5;
+            break;
+        default:
+            starNum = 0;
+    }
+       star.textContent = `${starNum} ⭐`
+       
+    }
+    
+</script>
 
 
 {% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        <!--<div class="title_info">
+            {{form.title.label}}{{form.title}}
+        </div>-->
+        {{form}}
+        <button class="btn btn-success" type="submit">Create</button>
+        
+    </form>
+
+<script>
+    const articleFld = document.querySelector('.title_info input')
+    console.log(articleFld)
+</script>
+
+{% endblock content %}
