@@ -25,7 +25,7 @@ class Article(models.Model):
     published_on = models.DateField(default=timezone.now, blank=True, null=True)
     modified_on = models.DateField(default=timezone.now, blank=True, null=True)
     genre = models.CharField(max_length=50, choices=GENRES, blank=True, null=True)
-    body = models.TextField()
+    body = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title

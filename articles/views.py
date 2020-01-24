@@ -40,10 +40,9 @@ def each_blog(request, pk):
 
 def reviews(request):
     reviews = ArticleReview.objects.all()
-    my_dict = {'text': 'hello'}
+
     context = {
         'reviews': reviews,
-        'my_dict': my_dict
     }
     return render(request, 'main/reviews.html', context)
 

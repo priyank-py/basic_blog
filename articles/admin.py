@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Article, ArticleReview
+from .forms import ArticleValidationForm
 
 class ArticleReviewsInline(admin.TabularInline):
     model = ArticleReview
@@ -14,6 +15,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ['genre',]
     search_fields = ['title', 'writer__username']
     inlines = (ArticleReviewsInline,)
+    form = ArticleValidationForm
 
 
 @admin.register(ArticleReview)
