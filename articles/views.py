@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, ArticleReview
 from .forms import ArticleForm, ArticleReviewForm
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url="admin:login")
 def home(request):
     articles = Article.objects.all().order_by('-published_on')
     
@@ -17,6 +20,7 @@ def about(request):
 def contact_us(request):
     return render(request, 'main/contact_us.html')
 
+@login_required(login_url="admin:login")
 def each_blog(request, pk):
     article = get_object_or_404(Article, id=pk)
     if request.method == 'POST':
