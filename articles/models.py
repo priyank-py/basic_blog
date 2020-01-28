@@ -19,16 +19,16 @@ class Article(models.Model):
         ('music', 'Music')
     )
 
-    title  = models.CharField(max_length=120)
-    writer = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=120, blank=True, null=True)
+    writer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     title_image = models.ImageField(upload_to=upload_to,  blank=True, null=True)
     published_on = models.DateField(default=timezone.now, blank=True, null=True)
     modified_on = models.DateField(default=timezone.now, blank=True, null=True)
     genre = models.CharField(max_length=50, choices=GENRES, blank=True, null=True)
     body = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
     
     def get_absolute_url(self):
         return reverse("each_blog", kwargs={"pk": self.pk})
