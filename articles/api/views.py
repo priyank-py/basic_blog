@@ -48,3 +48,21 @@ def update_article_view(request, id):
             data["success"] = "Article Updated!"
             return Response(data, status.HTTP_201_CREATED)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+#DELETE
+@api_view(['DELETE',])
+def delete_article_view(request, id):
+    try:
+        article = Article.objects.get(id=id)
+    except Article.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == "DELETE":
+        operations = article.delete()
+        data = {}
+        if operations:
+            data["success"] = 'Article deleted!'
+        else:
+            data["failure"] = "Article not deleted!"
+        return Response(data=data)

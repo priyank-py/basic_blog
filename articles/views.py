@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, ArticleReview
 from .forms import ArticleForm, ArticleReviewForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView
 
 
 @login_required(login_url="admin:login")
@@ -49,6 +50,34 @@ def reviews(request):
         'reviews': reviews,
     }
     return render(request, 'main/reviews.html', context)
+
+
+class BlogView(CreateView):
+    form_class = ArticleReviewForm
+    template_name = "main/each_blog.html"
+
+    def get(self, request, pk):
+        article = get_object_or_404(Article, id=pk)
+        form = self.form_class()
+        context = {
+            'article': article,
+            'form': form,
+        }
+        return render(request, self.template_name, context)
+    
+    def post(self, request, pk):
+        article = get_object_or_404(Article, id=pk)
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.article = article
+            data.user = request.user
+            data.save()
+            return redirect('each_blog', pk)
+
+
+
 
 def create_blog(request):
     if request.method =='POST':
